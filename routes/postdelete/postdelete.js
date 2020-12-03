@@ -25,7 +25,6 @@ var pug = require('pug');
 var session_username;
 
 
-
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));   
 
