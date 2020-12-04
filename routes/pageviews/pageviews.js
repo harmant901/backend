@@ -37,6 +37,11 @@ router.use(cookieParser());
 let MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://harmantiwana:manwar123@cluster0.nmhm9.mongodb.net/<dbname>?retryWrites=true&w=majority"
 
+// default
+
+router.get('/', (req, res) => {
+    res.send('Tester'); 
+});
 
 // home panel
 
