@@ -6,7 +6,7 @@ app.set('view engine', 'pug');
 
 
 
-const port = 8000;
+const port = process.env.PORT || 3000;
 
 // access our external routes
 
