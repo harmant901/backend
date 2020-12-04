@@ -27,10 +27,13 @@ html(lang="en")
         each post in posts
             div.column
                 - var img = "/images/" + post.fileImageName
-            
+                
            
                 h3 #{post.listingTitle}
                 h6 By #{post.Author}
+                if user[0].avatar
+                    - var imgavatar = "/images/" + user[0].avatar;
+                    img(src=imgavatar height="50px" width="50px" alt="")
                 h6 #{post.timeOfPost}
                 img(src=img height="200px" alt="Image")
                 p #{post.postMessage}

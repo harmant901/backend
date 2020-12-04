@@ -41,9 +41,26 @@ var url = "mongodb+srv://harmantiwana:manwar123@cluster0.nmhm9.mongodb.net/<dbna
 // home panel
 
 router.get('/user/panel/:username', (req, res) => {
-   // check if user actually logged in correctly.
-  
+   
+   var userdata;
+    
     // query the database, then send the data into the render
+
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("users");
+
+
+        
+        dbo.collection("user").find({}).toArray(function(err, result) {
+          
+            userdata = result;
+            
+        });
+        
+    });
+
+
+
     MongoClient.connect(url, function(err, db) {
         var dbo = db.db("posts");
 
@@ -53,7 +70,8 @@ router.get('/user/panel/:username', (req, res) => {
             if(req.cookies) {
                 res.render('home', {
                     username: req.params.username,
-                    posts: result
+                    posts: result,
+                    user: userdata
                 });
            } else {
                 res.render('error');
@@ -68,9 +86,25 @@ router.get('/user/panel/:username', (req, res) => {
 // user settings page
 
 router.get('/user/panel/:username/profile/settings', (req, res) => {
-    res.render('usersettings', {
-        username: req.cookies.username
+    // query the database, then send the data into the render
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("users");
+
+        dbo.collection("user").find({}).toArray(function(err, result) {
+          
+            
+            if(req.cookies) {
+                res.render('usersettings', {
+                    username: req.params.username,
+                    user: result
+                });
+           } else {
+                res.render('error');
+           }
+        });
+        
     });
+    
 });
 
 // listing page & create listing page

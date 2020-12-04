@@ -15,6 +15,7 @@ app.use('/', require('./routes/loginregister/loginregister'));
 app.use('/', require('./routes/pageviews/pageviews'));
 app.use('/logout', require('./routes/logout/logout'));
 app.use('/user', require('./routes/postdelete/postdelete'));
+app.use('/user/avatar', require('./routes/avatarupload/avatarupload'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
