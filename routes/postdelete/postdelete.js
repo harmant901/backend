@@ -11,7 +11,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 // for file uploads
-var multer = require('multer');
+var multer = require('multer');  
 var uploadDestination = multer({dest: 'public/images'});
 var uniqid = require('uniqid');
 var fs = require('fs');
