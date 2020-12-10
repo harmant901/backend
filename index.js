@@ -1,12 +1,22 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 
 app.set('view engine', 'pug');
 
+//Allow all the things
+const corsOptions = {
+    origin: "http://localhost:3000",
+    methods: "GET, POST, DELETE, PUT"
+}
+// use cors
+
+app.use(cors(corsOptions));
 
 
 const port = 8000;
+
 
 // access our external routes
 

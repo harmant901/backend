@@ -124,6 +124,25 @@ router.get('/post', (req, res) => {
 });
 
 
+// get user route
+router.get('/users', (req, res) => {
+    
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("users");
+
+
+        
+        dbo.collection("user").find({}).toArray(function(err, result) {
+          
+            res.send(result);
+            
+        });
+        
+    });
+});
+
+
+
 
 
  
