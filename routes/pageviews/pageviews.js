@@ -66,21 +66,47 @@ router.get('/user/panel/:username', (req, res) => {
 
         dbo.collection("post").find({}).toArray(function(err, result) {
           
-            console.log(result);
+          
             if(req.cookies) {
                 res.render('home', {
                     username: req.params.username,
                     posts: result,
                     user: userdata
                 });
+            db.close();
            } else {
                 res.render('error');
+            db.close();
            }
         });
         
     });
 
    
+});
+
+// reported posts (for admins) page
+
+router.get('/user/panel/:username/profile/reportedposts', (req, res) => {
+    
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("reportedposts");
+
+        dbo.collection("reportedpost").find({}).toArray(function(err, result) {
+          
+            
+            if(req.cookies) {
+                res.render('reportedposts', {
+                    reportedposts: result
+                });
+            db.close();
+           } else {
+                res.render('error');
+                db.close();
+           }
+        });
+        
+    });
 });
 
 // user settings page

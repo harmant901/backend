@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title HarmansList | Report Post Form
+        style
+            include style.css
+    body
+
+    h1 Report This Post
+    p Found a post suspicious? Report it here with your details.
+    form(method="POST" action="/user/post/report/" + postID)
+        input(type="textfield" name="reason" placeholder="Reason")
+        br
+        input(rows="2" type="textfield" name="reasondetails" placeholder="Message")
+        br
+        input(type="submit" value="Submit Report")

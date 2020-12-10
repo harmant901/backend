@@ -26,6 +26,8 @@ app.use('/', require('./routes/pageviews/pageviews'));
 app.use('/logout', require('./routes/logout/logout'));
 app.use('/user', require('./routes/postdelete/postdelete'));
 app.use('/user/avatar', require('./routes/avatarupload/avatarupload'));
+app.use('/user/post', require('./routes/reportpost/reportpost'));
+app.use('/post/report', require('./routes/approvedeny/approvedeny'))
 
 app.use(express.static(path.join(__dirname, 'public')));
 
