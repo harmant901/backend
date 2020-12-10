@@ -39,6 +39,22 @@ var url = "mongodb+srv://harmant901:manwar@harman2107project.njxma.mongodb.net/<
 
 
 router.post('/', (req, res) => {
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("users");
+
+        var query = {username: req.cookies.username};
+        var newval = {$set: {username: req.cookies.username, online: false}};
+
+        dbo.collection("user").updateOne(query, newval, function(err, res) {
+            if(err) {
+                throw err;
+            }
+
+            console.log('Record avatar updated.');
+            db.close();
+        });
+        
+    });
     //clear cookies and redirect
     res.clearCookie('username');
     session_username = "";

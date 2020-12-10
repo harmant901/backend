@@ -57,7 +57,8 @@ router.post('/user/register', (req,res) => {
                 accounttype: 'Standard',
                 avatar: "",
                 username: iusername,
-                password: ipassword
+                password: ipassword,
+                online: false
             },
             function(err, result) {
                 if(err) throw err;
@@ -83,7 +84,9 @@ router.post('/user/login', (req, res) => {
     // check if user and password is correct
     var iusername = req.body.username;
     var ipassword = req.body.password;
-   
+
+
+
     // set our global session variable
     session_username = iusername;
     MongoClient.connect(url, function(err, db) {
@@ -103,9 +106,23 @@ router.post('/user/login', (req, res) => {
             }
            
         
-            db.close();
+        
         }
         )
+
+        // set status
+
+        var query = {username: iusername};
+        var newval = {$set: {username: iusername, online: true}};
+
+        dbo.collection("user").updateOne(query, newval, function(err, res) {
+            if(err) {
+            throw err;
+        }
+
+    
+        db.close();
+    });
     });
 
 });
