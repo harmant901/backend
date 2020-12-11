@@ -1,12 +1,22 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 
 app.set('view engine', 'pug');
 
+//Allow all the things
+const corsOptions = {
+    origin: "http://localhost:3000",
+    methods: "GET, POST, DELETE, PUT"
+}
+// use cors
+
+app.use(cors(corsOptions));
 
 
 const port = 8080;
+
 
 // access our external routes
 
@@ -15,6 +25,9 @@ app.use('/', require('./routes/loginregister/loginregister'));
 app.use('/', require('./routes/pageviews/pageviews'));
 app.use('/logout', require('./routes/logout/logout'));
 app.use('/user', require('./routes/postdelete/postdelete'));
+app.use('/user/avatar', require('./routes/avatarupload/avatarupload'));
+app.use('/user/post', require('./routes/reportpost/reportpost'));
+app.use('/post/report', require('./routes/approvedeny/approvedeny'))
 
 app.use(express.static(path.join(__dirname, 'public')));
 

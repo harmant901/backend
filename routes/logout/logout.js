@@ -35,10 +35,26 @@ router.use(cookieParser());
 // mongodb credentials
 
 let MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://harmantiwana:manwar123@cluster0.nmhm9.mongodb.net/<dbname>?retryWrites=true&w=majority"
+var url = "mongodb+srv://harmant901:manwar@harman2107project.njxma.mongodb.net/<dbname>?retryWrites=true&w=majority"
 
 
 router.post('/', (req, res) => {
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("users");
+
+        var query = {username: req.cookies.username};
+        var newval = {$set: {username: req.cookies.username, online: false}};
+
+        dbo.collection("user").updateOne(query, newval, function(err, res) {
+            if(err) {
+                throw err;
+            }
+
+            console.log('Record avatar updated.');
+            db.close();
+        });
+        
+    });
     //clear cookies and redirect
     res.clearCookie('username');
     session_username = "";

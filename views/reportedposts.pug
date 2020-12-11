@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title HarmansList | Reported Posts
+        style
+            include style.css
+    body
+
+    h1 View Reported Posts
+    p1 Approve or deny report requests from users
+
+     div.row 
+            each reportedpost in reportedposts
+                div.column
+                   h5 #{reportedpost.reportReason}
+                   h6 Post ID - #{reportedpost.postID}
+                   p #{reportedpost.reportMessage}
+
+                   - var reportedpostID = reportedpost.postID;
+
+                   form(method="POST" action="/post/report/"+reportedpostID+"/approved")
+                        input(type="submit" value="Approve")
+                   form(method="POST" action="/post/report/"+reportedpostID+"/denied/")
+                        input(type="submit" value="Deny")

@@ -20,6 +20,15 @@ a {
     clear: both;
 }
 
+.onlineStatus {
+    color: green;
+    font-size: 15px;
+}
+
+h1 {
+    font-family: arial;
+}
+
 h2 {
     text-align: center;
 }

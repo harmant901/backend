@@ -18,28 +18,40 @@ html(lang="en")
 
     form(method="GET" action="/user/panel/"+username+"/profile/settings")
         input(type="submit" value="Edit Profile")
+
+    // check if user is admin
+    if username == "Harman"
+        form(method="GET" action="/user/panel/"+username+"/profile/reportedposts")
+            input(type="submit" value="View Reports")
     br
     a(href="/user/panel/" + username + "/createlisting") Create Listing
 
     h2 Current Listings
+
+    
+    
     
     div.row 
-        each post in posts
-            div.column
-                - var img = "/images/" + post.fileImageName
+            each post in posts
+                div.column
+                    - var img = "/images/" + post.fileImageName
+                    
             
-           
-                h3 #{post.listingTitle}
-                h6 By #{post.Author}
-                h6 #{post.timeOfPost}
-                img(src=img height="200px" alt="Image")
-                p #{post.postMessage}
-                if username == post.Author
-                    form(method="POST" action="/user/post/delete/" + post.fileImageName)
-                        input(type="submit" value="Delete Post") 
-                if username !== post.Author
-                    button(type="button") Contact Seller
-                    button(type="button") Report Post
+                    h3 #{post.listingTitle}
+                    h6 By #{post.Author}
+                        
+                    if user
+                        - var imgavatar = "/images/" + user[0].avatar;
+                        img(src=imgavatar height="50px" width="50px" alt=" ") 
+                    h6 #{post.timeOfPost}
+                    img(src=img height="200px" alt="Image")
+                    p #{post.postMessage}
+                    if username == post.Author
+                        form(method="POST" action="/user/post/delete/" + post.fileImageName)
+                            input(type="submit" value="Delete Post") 
+                    if username !== post.Author
+                        form(method="GET" action="/user/post/report/" + post._id)
+                            button(type="submit") Report Post
     
 
 
