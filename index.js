@@ -5,14 +5,10 @@ const cors = require('cors');
 
 app.set('view engine', 'pug');
 
-//Allow all the things
-const corsOptions = {
-    origin: "http://localhost:3000",
-    methods: "GET, POST, DELETE, PUT"
-}
+
 // use cors
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 const port = 8000;
