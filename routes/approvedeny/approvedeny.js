@@ -6,6 +6,11 @@ const router = express.Router();
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser');
 
+// object id
+var ObjectId = require('mongodb').ObjectID;
+
+
+
 // unique user id
 const { v4: uuidv4 } = require('uuid');
 
@@ -43,15 +48,16 @@ router.post('/:reportedpostid/approved', (req, res) => {
         if(err) throw err;
     
         var dbo = db.db("posts");
+        var o_id = new ObjectId(req.params.reportedpostid);
         
-        dbo.collection("post").findOne({_id: req.params.reportedpostid}, function(err, result) {
+        dbo.collection("post").deleteOne({_id: o_id}, function(err, result) {
             if(err) throw err;
             console.log(result);
         });
         
         
     });
-/*
+
     MongoClient.connect(url, function(err, db) {
         if(err) throw err;
     
@@ -64,7 +70,7 @@ router.post('/:reportedpostid/approved', (req, res) => {
         
         db.close();
     });
-*/
+
     res.redirect('/user/panel/'+req.cookies.username+'/profile/reportedposts')
     
 });
