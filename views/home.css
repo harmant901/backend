@@ -1,0 +1,186 @@
+body {
+    font-family: sans-serif;
+    background-color: #372B2B;
+}
+
+/* MY CSS */
+
+.row {
+    position: relative;
+    top: 50px;
+    width: 100%;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+#header-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#user-box {
+    background-color: #110D0D;
+    height: 174px;
+    width: 90%;
+    margin-left: 60px;
+    margin-top: 60px;
+    padding: 20px;
+}
+
+#user-box > #welcome-msg {
+    color: white;
+    font-size: 19px;
+    font-weight: 500;
+    padding: 17.5px;
+}
+
+#user-box > #current-date {
+    position: relative;
+    top: -35px;
+    color: white;
+    opacity: .4;
+    font-size: 12.5px;
+    padding: 17.5px;
+    font-weight: 100;
+}
+
+#user-box > #btn-wrapper {
+    display: inline-flex;
+    width: 100%;
+    position: relative;
+    top: -50px;
+    margin: auto;
+    padding: 17.5px;
+}
+
+#logout-btn, #editprof-btn {
+    border: none;
+    border-radius: 55px;
+    width: 150px;
+    height: 42px;
+    background-color: white;
+    color: black;
+    font-size: 15px;
+    
+}
+
+#editprof-btn {
+    margin-left: 50px;
+}
+
+#post-header {
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr .5fr;
+}
+
+#post-header > #left {
+    display: flex;
+    text-align: left;
+}
+
+#post-header > #left > img {
+    border-radius: 1000px;
+    padding: 20px;
+}
+
+#post-header > #left > #post-username-wrapper > h4 {
+    position: relative;
+    top: 5px;
+    font-weight: 200;
+    font-size: 17px;
+    width: 100%;
+}
+
+#post-header > #left > #post-username-wrapper > p {
+    position: relative;
+    top: -12px;
+    font-weight: 200;
+    font-size: 12px;
+    opacity: .4;
+    width: 100%;
+}
+
+#imagepost-wrapper {
+    position: relative;
+    top: 10px;
+    width: 100%;
+}
+
+#post-desc-wrapper {
+    width: 100%;
+}
+
+#post-desc {
+    position:relative;
+    padding-top: 30px;
+    color: white;
+    font-size: 12px;
+    background-color: #070606;
+    font-weight: 100;
+}
+
+#post-desc > span {
+    position: relative;
+    top: -19px;
+}
+
+.deletepost, .reportpost {
+    position: relative;
+    top: -15px;
+    width: 113px;
+    height: 33px;
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    border: none;
+    float: left;
+    display: block;
+    margin-left: 20px;
+    font-weight: lighter;
+}
+
+
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+.column {
+    
+    text-align: center;
+    float: left;
+    width: 31%;
+    height: 40%;
+    background-color: #0D0909;
+    border: solid 2px #372B2B;
+}
+
+#avatar {
+    background-color: orange;
+    width: 42px;
+    height: 42px;
+    border-radius: 1000px;  
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.onlineStatus {
+    color: green;
+    font-size: 15px;
+}
+
+h1 {
+    font-family: arial;
+}
+
+h2 {
+    text-align: center;
+}

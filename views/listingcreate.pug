@@ -5,21 +5,24 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title HarmansList | Create A Listing
         style
-            include style.css
+            include listingcreate.css
+       
     body
 
-    h1 Create a listing!
-    // variables
+    div#listing-wrapper
+        h1 Create a listing!
+        p Create a listing that will be discoverable by other users
+        // variables
 
-    - var username = username;
+        - var username = username;
 
-    form(method="POST" action="/user/" + username + "/createlisting" enctype="multipart/form-data")
-        input(type="text" name="title" placeholder="title")
-        br
-        input(type="text" name="message" placeholder="message")
-        br 
-        input(type="file" name="photo" accept="image/x-png")
-        br
-        input(type="submit" value="Submit Listing")
-       
+        form(method="POST" action="/user/" + username + "/createlisting" enctype="multipart/form-data")
+            input#title(type="text" name="title" placeholder="title")
+            br
+            input#message(type="text" name="message" placeholder="message")
+            br 
+            input#file(type="file" name="photo" accept="image/x-png")
+            br
+            input#submit(type="submit" value="Submit Listing")
+        
     

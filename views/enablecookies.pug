@@ -5,11 +5,13 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Enable Cookies Procedure
         style
-            include style.css
+            include enablecookies.css
     body
 
-    h1 Please ensure you have cookies enabled.
-    p1 Having cookies enabled will make your experience on this site even better!
-    - var usernamer = username
-    form(method="GET" action="/user/panel/" + usernamer)
-        input(type="submit" value="Continue")
+    div.header-wrapper
+        h1 Please ensure you have cookies enabled.
+        p Having cookies enabled will make your experience on this site even better!
+        - var usernamer = username
+        form(method="GET" action="/user/panel/" + usernamer)
+            input(type="submit" value="Continue")
+

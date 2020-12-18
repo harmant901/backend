@@ -5,7 +5,7 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title HarmansList | Reported Posts
         style
-            include style.css
+            include reportedposts.css
     body
 
     h1 View Reported Posts
@@ -24,3 +24,9 @@ html(lang="en")
                         input(type="submit" value="Approve")
                    form(method="POST" action="/post/report/"+reportedpostID+"/denied/")
                         input(type="submit" value="Deny")
+                    
+                    
+            - var usernamer = username;
+            form(method="GET" action="/user/panel/" + usernamer)
+                input(type="submit" value="Back")
+

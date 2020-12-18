@@ -1,0 +1,44 @@
+body {
+    background-color: #372B2B;
+    font-family: sans-serif;
+}
+
+#report-wrapper {
+    background-color: #110D0D;
+    color: white;
+    font-weight: 100;
+    padding: 25px;
+    width: 35%;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+h1 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 14px;
+}
+
+#reason,#message {
+    background-color: transparent;
+    border: none;
+    border-bottom: solid .5px white;
+    padding-bottom: 20px;
+    width: 50%;
+}
+
+#message {
+    margin-top: 10px;
+}
+
+
+#submit {
+    margin-top: 15px;
+    width: 132px;
+    height: 37.5px;
+    font-size: 12px;
+}
+
+

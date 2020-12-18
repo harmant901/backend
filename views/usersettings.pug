@@ -5,22 +5,24 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title HarmansList | User Settings
         style
-            include style.css
+            include usersettings.css
     body
+	
+    div#settings-wrapper
+        h1 Edit Your Profile
 
-    h1 Edit Your Profile
-
-    h3 Upload An Avatar
-    h5 Current Avatar
-    
-    if user[0].avatar
-        - var imgsrc = "/images/" + user[0].avatar;
-        img(src=imgsrc height="100px" width="100px")
-        form(method="POST" action="/user/avatar/delete")
-            input(type="submit" value="Delete Avatar")
-    else
-        p3 No current avatar :(
-        p Uploading an avatar can let other people know who they are doing business with
-        form(method="POST" action="/user/avatar/upload" enctype="multipart/form-data")
-            input(type="file" name="avatar" accept="image/x-png")
-            input(type="submit" value="Upload Avatar")
+        h3 Upload An Avatar
+        
+        
+        if user[0].avatar
+            h5 Current Avatar
+            - var imgsrc = "/images/" + user[0].avatar;
+            img(src=imgsrc height="100px" width="100px" alt=":")
+            form(method="POST" action="/user/avatar/delete")
+                input(type="submit" value="Delete Avatar")
+        else
+            p3 No current avatar :(
+            p Uploading an avatar can let other people know who they are doing business with
+            form(method="POST" action="/user/avatar/upload" enctype="multipart/form-data")
+                input(type="file" name="avatar" accept="image/x-png")
+                input(type="submit" value="Upload Avatar")

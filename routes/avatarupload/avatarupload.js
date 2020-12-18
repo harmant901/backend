@@ -24,6 +24,9 @@ var pug = require('pug');
 
 var session_username;
 
+// controller
+
+const AvatarUploadController = require('../../controllers/avatarupload/avatarupload');
 
 
 router.use(bodyParser.json());
@@ -40,93 +43,11 @@ var url = "mongodb+srv://harmant901:manwar@harman2107project.njxma.mongodb.net/<
 
 // upload avatar
 
-router.post('/upload', uploadDestination.single('avatar'), (req, res) => {
-    if(!req.file.filename) {
-        res.render('error');
-    } else {
-        var nfilename = req.cookies.username + "-" + uniqid() + '.png';
-
-    fs.rename('public/images/'+req.file.filename, 'public/images/'+nfilename, (err) => {
-        if(err) {
-            console.log('error renaming');
-        } else {
-            console.log('renamed')  
-        }
-        
-    });
-
-    MongoClient.connect(url, function(err, db) {
-        if(err) throw err;
-    
-        var dbo = db.db("users");
-    
-        var query = {username: req.cookies.username};
-        var newval = {$set: {username: req.cookies.username, avatar: nfilename}};
-
-        dbo.collection("user").updateOne(query, newval, function(err, res) {
-            if(err) {
-                throw err;
-            }
-
-            console.log('Record avatar updated.');
-            db.close();
-        });
-       
-    });
-    
-    res.redirect('/user/panel/' + req.cookies.username + '/profile/settings');
-    }
-    
-});
+router.post('/upload', uploadDestination.single('avatar'), AvatarUploadController.upload);
 
 
 // delete avatar
 
-router.post('/delete', (req, res) => {
-    MongoClient.connect(url, function(err, db) {
-        if(err) throw err;
-    
-        var dbo = db.db("users");
-    
-        dbo.collection("user").find({}).toArray(function(err, result) {
-          
-            // result[0].avatar
-            var fileToRemove = result[0].avatar;
-            var path = 'public/images/' + fileToRemove;
-            // remove file
-            
-            fs.unlink(path, (err) => {
-                if(err) {
-                    console.log('unable to delete file');
-                } else {
-                    console.log('Avatar file successfully removed');
-                }
-            }); 
-             
-        });
-       
-    });
-
-    MongoClient.connect(url, function(err, db) {
-        if(err) throw err;
-    
-        var dbo = db.db("users");
-    
-        var query = {username: req.cookies.username};
-        var newval = {$set: {username: req.cookies.username, avatar: ""}};
-
-        dbo.collection("user").updateOne(query, newval, function(err, res) {
-            if(err) {
-                throw err;
-            }
-
-            console.log('Record avatar updated.');
-            db.close();
-        });
-       
-    });
-    
-    res.redirect('/user/panel/' + req.cookies.username + '/profile/settings');
-});
+router.post('/delete', AvatarUploadController.delete);
  
 module.exports = router;

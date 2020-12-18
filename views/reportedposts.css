@@ -1,0 +1,35 @@
+body {
+    background-color: #372B2B;
+    color: white;
+	font-family: sans-serif;
+}
+
+.column {
+    
+    text-align: center;
+    float: left;
+    width: 31%;
+    height: 40%;
+    background-color: #0D0909;
+    border: solid 2px #372B2B;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h1, p1 {
+	margin-left: 30px;
+    margin-top: 30px;
+}
+
+input {
+    margin-left: 30px;
+    margin-top: 30px;
+    border: none;
+    padding: 20px;
+    width: 10%;
+}
+

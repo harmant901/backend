@@ -11,7 +11,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 // for file uploads
-var multer = require('multer');  
+var multer = require('multer');
 var uploadDestination = multer({dest: 'public/images'});
 var uniqid = require('uniqid');
 var fs = require('fs');
@@ -26,7 +26,6 @@ var session_username;
 
 // controller
 
-const ReportPostController = require('../../controllers/reportpost/reportpost');
 
 
 router.use(bodyParser.json());
@@ -40,10 +39,27 @@ router.use(cookieParser());
 let MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://harmant901:manwar@harman2107project.njxma.mongodb.net/<dbname>?retryWrites=true&w=majority"
 
-router.get('/report/:postid', ReportPostController.get_post);
 
-router.post('/report/:postid', ReportPostController.initiate_post);
+exports.logout = (req, res) => {
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("users");
 
+        var query = {username: req.cookies.username};
+        var newval = {$set: {username: req.cookies.username, online: false}};
 
+        dbo.collection("user").updateOne(query, newval, function(err, res) {
+            if(err) {
+                throw err;
+            }
 
-module.exports = router;
+            console.log('Record avatar updated.');
+            db.close();
+        });
+        
+    });
+    //clear cookies and redirect
+    res.clearCookie('username');
+    session_username = "";
+    res.redirect('http://harman2107project.herokuapp.com/');
+    // testing
+}

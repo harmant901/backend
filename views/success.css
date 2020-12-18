@@ -1,0 +1,28 @@
+body {
+	background-color: #372B2B;
+	font-family: sans-serif;
+	font-weight: 100;
+}
+
+h1 {
+	background-color: #110D0D;
+	padding: 25px;
+	color: white;
+	font-size: 18px;
+}
+
+p {
+
+	background-color: #110D0D;
+	padding: 25px;
+	color: white;
+	font-size: 14.5px;
+}
+
+input {
+	background-color: white;
+	border: none;
+	width: 132px;
+	height: 37.5px;
+	color: black;
+}

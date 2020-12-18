@@ -1,0 +1,39 @@
+body {
+    background-color: #372B2B;
+
+}
+
+.header-wrapper {
+    width: 100%;
+}
+
+.header-wrapper > h1 {
+    background-color: #110D0D;
+    padding: 30px;
+    font-size: 19px;
+    font-family: sans-serif;
+    font-weight: 100;
+    color: white;
+    width: 30%;
+}
+
+.header-wrapper > p {
+    position: relative;
+    top: -40px;
+    background-color: #110D0D;
+    padding: 30px;
+    color: white;
+    font-size: 12px;
+    font-family: sans-serif;
+    width: 30%;
+}
+
+.header-wrapper > form > input {
+    border: none;
+    border-radius: 50px;
+    background-color: #110D0D;
+    color: white;
+    padding: 15px;
+    width: 185px;
+    font-weight: 100;
+}

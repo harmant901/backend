@@ -2,6 +2,12 @@ const express = require('express');
 
 // essentials
 
+// AuthController.js
+var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
+var config = require('../../config');
+var User = require('../../model/User');
+
 const router = express.Router();
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser');
@@ -24,6 +30,9 @@ var pug = require('pug');
 
 var session_username;
 
+// controller
+
+const LoginRegisterController = require('../../controllers/loginregister/loginregister');
 
 
 router.use(bodyParser.json());
@@ -37,103 +46,20 @@ router.use(cookieParser());
 let MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://harmant901:manwar@harman2107project.njxma.mongodb.net/<dbname>?retryWrites=true&w=majority"
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://harmant901:manwar@harman2107project.njxma.mongodb.net/<dbname>?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true } );
 
 // register route
 
-router.post('/user/register', (req,res) => {
-    // validate
-    var iusername = req.body.username;
-    var ipassword = req.body.password;
-
-    if(iusername != "" || ipassword != "") {
-
-        MongoClient.connect(url, function(err, db) {
-            if(err) throw err;
-        
-            var dbo = db.db("users");
-        
-            dbo.collection("user").insertOne({
-                ID: uuidv4(),
-                accounttype: 'Standard',
-                avatar: "",
-                username: iusername,
-                password: ipassword,
-                online: false
-            },
-            function(err, result) {
-                if(err) throw err;
-                console.log(result);
-                db.close();
-            }
-            )
-        });
-    
-        res.send('Register Recieved!, you may now go back to the panel to login.');
-    } else {
-        res.send('Please enter valid fields.');
-    }
-
-   
-
-});   
+router.post('/user/register', LoginRegisterController.register );   
 
 // login route
 
 
-router.post('/user/login', (req, res) => {
-    // check if user and password is correct
-    var iusername = req.body.username;
-    var ipassword = req.body.password;
-
-
-
-    // set our global session variable
-    session_username = iusername;
-    MongoClient.connect(url, function(err, db) {
-        if(err) throw err;
-    
-        var dbo = db.db("users");
-    
-        dbo.collection("user").findOne({
-           username: iusername,
-           password: ipassword
-        },
-        function(err, result) {
-            if(result) {
-                res.redirect('http://' + req.headers.host + "/setcookies");
-            } else {
-                res.send('Invalid login credentials. Please go back and try again!');
-            }
-           
-        
-        
-        }
-        )
-
-        // set status
-
-        var query = {username: iusername};
-        var newval = {$set: {username: iusername, online: true}};
-
-        dbo.collection("user").updateOne(query, newval, function(err, res) {
-            if(err) {
-            throw err;
-        }
-
-    
-        db.close();
-    });
-    });
-
-});
+router.post('/user/login', LoginRegisterController.login);
 
 //set cookies then send to home panel
-router.get('/setcookies', (req,res) => {
-    res.cookie('username', session_username, {httpOnly: false});
-    res.render('enablecookies', {
-        username: session_username
-    })
-});
+router.get('/setcookies', LoginRegisterController.setcookies);
 
 
 module.exports = router;
